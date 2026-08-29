@@ -31,5 +31,13 @@ jobs:
       - name: Deploy Lambda function # Zips lambda function and updates AWS Lambda function
         run: |
           cd lambda
-          zip -r lambda.zip .
-          aws lambda update-function-code --function-name my-test-cicd-lambda --zip-file fileb://lambda.zip
+          zip -r lambda.zip . || exit 1
+          aws lambda update-function-code --function-name my-test-cicd-lambda --zip-file fileb://lambda.zip || exit 1
+
+      - name: Deployment Success # displays a message if deployment is successful
+        if: success()
+        run: echo "Lambda function deployed successfully!"
+
+      - name: Deployment Failed # displays a message if deployment fails
+        if: failure()
+        run: echo "Lambda deployment failed!" && exit 1
