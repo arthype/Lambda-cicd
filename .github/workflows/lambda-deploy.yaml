@@ -1,5 +1,5 @@
 name: Deploy AWS Lambda
-on: [push]
+on:
     push:
     branches:
       - main
