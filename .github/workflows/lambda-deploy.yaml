@@ -1,5 +1,6 @@
 name: Deploy AWS Lambda
-on: 
+on:
+  workflow_dispatch: # Allows the workflow to be manually triggered
 
   push:
     branches:
